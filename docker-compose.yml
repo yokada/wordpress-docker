@@ -1,0 +1,44 @@
+version: '3.1'
+
+services:
+  app:
+    build: ./docker/wordpress
+    restart: always
+    ports:
+      - 8080:80
+    env_file:
+      - ./docker/wordpress/.env
+    depends_on:
+      - db
+    volumes:
+      - app-data:/var/www/html
+      - ./src/wp-content:/var/www/html/wp-content
+
+  wp-cli:
+    image: wordpress:cli
+    depends_on:
+      - app
+      - db
+    volumes:
+      - app-data:/var/www/html
+      - ./src/wp-content:/var/www/html/wp-content
+
+  db:
+    build: ./docker/mysql
+    restart: always
+    ports:
+      - "13306:3306"
+    env_file:
+      - ./docker/mysql/.env
+    volumes:
+      - db-data:/var/lib/mysql
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+
+volumes:
+  app-data:
+  db-data:

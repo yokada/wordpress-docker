@@ -1,0 +1,11 @@
+[mysqld]
+
+[mysqld_safe]
+
+[mysqldump]
+
+[myisamchk]
+
+[mysqlhotcopy]
+
+[client]
