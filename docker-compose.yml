@@ -11,8 +11,8 @@ services:
     depends_on:
       - db
     volumes:
-      - app-data:/var/www/html
-      - ./src/wp-content:/var/www/html/wp-content
+      - app-data:/var/www
+      - ./html:/var/www/html
 
   wp-cli:
     image: wordpress:cli
@@ -20,8 +20,8 @@ services:
       - app
       - db
     volumes:
-      - app-data:/var/www/html
-      - ./src/wp-content:/var/www/html/wp-content
+      - app-data:/var/www
+      - ./html:/var/www/html
 
   db:
     build: ./docker/mysql
