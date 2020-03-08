@@ -12,6 +12,7 @@ COPY xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 COPY localhost.crt /etc/ssl/certs/localhost.crt
 COPY localhost.key /etc/ssl/private/localhost.key
 COPY default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN a2enmod ssl \
     && a2ensite default-ssl
