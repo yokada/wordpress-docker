@@ -5,7 +5,16 @@ RUN curl -sSLO https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mh
     mv mhsendmail_linux_amd64 /usr/local/bin/mhsendmail
 
 RUN pecl install xdebug \
-  && docker-php-ext-enable xdebug
+    && docker-php-ext-enable xdebug
 
 COPY sendmail.ini /usr/local/etc/php/conf.d
 COPY xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+COPY localhost.crt /etc/ssl/certs/localhost.crt
+COPY localhost.key /etc/ssl/private/localhost.key
+COPY default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
+
+RUN a2enmod ssl \
+    && a2ensite default-ssl
+
+EXPOSE 80 443
+CMD ["apache2-foreground"]
