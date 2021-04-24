@@ -1,8 +1,12 @@
-## start containers
+## prepare config files
 
 ```
-$ mv .env.sample .env
+$ cp .env.sample .env
+$ cp docker/mysql/.env.sample docker/mysql/.env
+$ cp docker/wordpress/.env.sample docker/wordpress/.env
 ```
+
+## start containers
 
 ```
 $ docker-compose up -d --build
