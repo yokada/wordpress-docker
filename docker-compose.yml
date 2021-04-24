@@ -28,7 +28,7 @@ services:
     build: ./docker/mysql
     restart: always
     ports:
-      - "13306:3306"
+      - "${DB_PUBLISHED_PORT}:3306"
     env_file:
       - ./docker/mysql/.env
     volumes:
@@ -37,8 +37,8 @@ services:
   mailhog:
     image: mailhog/mailhog
     ports:
-      - "8025:8025"
-      - "1025:1025"
+      - "${MAILHOG_PUBLISHED_PORT1}:8025"
+      - "${MAILHOG_PUBLISHED_PORT2}:1025"
 
 volumes:
   app-data:

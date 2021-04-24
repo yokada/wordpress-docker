@@ -1,7 +1,11 @@
 ## start containers
 
 ```
-$ docker-compose up -d
+$ mv .env.sample .env
+```
+
+```
+$ docker-compose up -d --build
 ```
 
 ## setup wordpress via wp-cli
