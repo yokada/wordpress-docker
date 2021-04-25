@@ -4,6 +4,10 @@ RUN curl -sSLO https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mh
     chmod +x mhsendmail_linux_amd64; \
     mv mhsendmail_linux_amd64 /usr/local/bin/mhsendmail
 
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x wp-cli.phar \
+    && mv wp-cli.phar /usr/local/bin/wp
+
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 

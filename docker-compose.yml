@@ -5,20 +5,11 @@ services:
     build: ./docker/wordpress
     restart: always
     ports:
-      - 443:443
-      - 8080:80
+      - ${HTTPS_PUBLISHED_PORT1}:443
+      - ${HTTP_PUBLISHED_PORT1}:80
     env_file:
       - ./docker/wordpress/.env
     depends_on:
-      - db
-    volumes:
-      - app-data:/var/www
-      - ./html:/var/www/html
-
-  wp-cli:
-    image: wordpress:cli
-    depends_on:
-      - wp
       - db
     volumes:
       - app-data:/var/www
