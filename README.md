@@ -4,7 +4,7 @@
 $ git clone --depth=1 --branch=master https://github.com/yokada/wordpress-docker.git
 ```
 
-change directory:
+## change directory
 
 ```
 $ cd wordpress-docker
@@ -26,32 +26,44 @@ $ docker-compose up -d --build
 
 ## install process to complete
 
-Brower access to `http://localhost:8080` and finish installation process.
+```
+$ docker-compose exec wp wp core install --url='http://localhost:8082' --title='wordpress dev site' --admin_user='admin' --admin_password='admin' --admin_email='admin@example.com' --allow-root
+```
+
+Or, Your brower can access to `http://localhost:8082` then finish installation process.
 
 ## setup wordpress via wp-cli
 
-<!--
 ```
-$ docker-compose run wp-cli core install --url='http://localhost:8080' --title='wordpress dev site' --admin_user='admin' --admin_password='admin' --admin_email='admin@example.com'
-```
--->
-
-```
-$ docker-compose run wp-cli language core install ja --activate
+$ docker-compose exec wp wp core install --url='http://localhost:8082' --title='wordpress dev site' --admin_user='admin' --admin_password='admin' --admin_email='admin@example.com' --allow-root
 ```
 
 ```
-$ docker-compose run wp-cli option update timezone_string 'Asia/Tokyo'
-$ docker-compose run wp-cli option update date_format 'Y-m-d'
-$ docker-compose run wp-cli option update time_format 'H:i'
+$ docker-compose exec wp wp language core install ja --activate --allow-root
 ```
 
 ```
-$ docker-compose run wp-cli plugin delete hello.php
+$ docker-compose exec wp wp option update timezone_string 'Asia/Tokyo' --allow-root
+$ docker-compose exec wp wp option update date_format 'Y-m-d' --allow-root
+$ docker-compose exec wp wp option update time_format 'H:i' --allow-root
 ```
 
 ```
-$ docker-compose run wp-cli theme delete twentynineteen
-$ docker-compose run wp-cli theme delete twentyseventeen
-$ docker-compose run wp-cli theme delete twentysixteen
+$ docker-compose exec wp wp plugin delete hello.php --allow-root
 ```
+
+```
+$ docker-compose exec wp wp theme delete twentynineteen --allow-root
+$ docker-compose exec wp wp theme delete twentyseventeen --allow-root
+$ docker-compose exec wp wp theme delete twentysixteen --allow-root
+```
+
+## SSL
+
+## Mailhog UI
+
+`http://localhost:18025/`
+
+## WP-CLI
+
+## Connect to DB from Host OS
